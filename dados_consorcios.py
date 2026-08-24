@@ -10,7 +10,7 @@ import plotly.graph_objects as go
 # Criação de gráfico
 # Criação de html
 
-# 1. Requisição à API
+# Requisição à API
 url = "https://royalblue-turtle-204261.hostingersite.com/ws_dados.php?tipo_pesquisa=1"
 
 try:
@@ -27,7 +27,7 @@ except Exception as e:
     print("Erro na API, carregando estrutura vazia:", e)
     rawData = []
 
-# 2. DataFrame Pandas e Sanitização
+# DataFrame Pandas e Sanitização
 df = pd.DataFrame(rawData)
 
 # Tratamento colunas
@@ -62,9 +62,6 @@ variavel_administradoras = sorted([a for a in df['administradora'].unique() if a
 dataInicio = variavel_todos_meses[0] if variavel_todos_meses else "N/A"
 dataFim = variavel_todos_meses[-1] if variavel_todos_meses else "N/A"
 
-# -------------------------------------------------------------
-# CALCULAR O MELHOR SEGMENTO GLOBAL (ESTÁTICO / FIXO DA BASE INTEIRA)
-# -------------------------------------------------------------
 df_seg_global = df.groupby('segmento')['quantidade'].sum().reset_index()
 df_seg_global = df_seg_global.sort_values(by='quantidade', ascending=False)
 
@@ -75,15 +72,11 @@ if not df_seg_global.empty:
 else:
     melhor_seg_global_texto = "N/A"
 
-# -------------------------------------------------------------
-# 4. MAPEAMENTO FIXO DE CORES POR SEGMENTO
-# -------------------------------------------------------------
+# MAPEAMENTO FIXO DE CORES POR SEGMENTO
 paleta_cores = ['#1A4B83', '#28A745', '#E67E22', '#8E44AD', '#17A2B8', '#D9534F', '#F39C12', '#34495E']
 mapa_cores_segmentos = {seg: paleta_cores[i % len(paleta_cores)] for i, seg in enumerate(variavel_segmentos)}
 
-# -------------------------------------------------------------
-# 5. GERAR LISTA ESTÁTICA DE ADMINISTRADORAS
-# -------------------------------------------------------------
+# GERAR LISTA ESTÁTICA DE ADMINISTRADORAS
 df_admin_estatico = df.groupby('administradora')['quantidade'].sum().reset_index()
 df_admin_estatico = df_admin_estatico.sort_values(by='quantidade', ascending=False)
 
@@ -101,9 +94,7 @@ for _, row in df_admin_estatico.iterrows():
 
 lista_admin_html = "".join(lista_admin_html_items)
 
-# -------------------------------------------------------------
-# 6. CRIAÇÃO DO GRÁFICO PLOTLY EM PYTHON
-# -------------------------------------------------------------
+# CRIAÇÃO DO GRÁFICO PLOTLY EM PYTHON
 fig = go.Figure()
 
 for seg in variavel_segmentos:
@@ -138,9 +129,7 @@ chart_html = fig.to_html(full_html=False, include_plotlyjs=False, div_id="plotly
 dados_json_str = df.to_json(orient='records')
 mapa_cores_json = json.dumps(mapa_cores_segmentos)
 
-# -------------------------------------------------------------
-# 7. HTML TEMPLATE + JS
-# -------------------------------------------------------------
+# HTML
 html_template = f"""<!DOCTYPE html>
 <html lang="pt-BR">
 <head>
@@ -380,8 +369,7 @@ html_template = f"""<!DOCTYPE html>
                     somaPorMes[mes] = (somaPorMes[mes] || 0) + qtd;
                 }}
             }});
-
-            // Melhor Mês (Reativo ao filtro)
+            
             let melhorMes = "N/A";
             let maiorValorMes = -1;
             Object.keys(somaPorMes).forEach(mes => {{
