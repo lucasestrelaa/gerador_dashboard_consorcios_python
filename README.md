@@ -1,6 +1,7 @@
 <div align="center">
   <h1>📊 Dashboard de Análise de Dados</h1>
-  <p><i>Mini projeto de visualização e análise de dados interativa usando Python e Plotly.</i></p>
+  <p><i>Projeto de visualização e análise de dados interativa usando Python e Plotly.</i></p>
+  <p>Acesse Online: https://royalblue-turtle-204261.hostingersite.com/</p>
 
   <!-- Badges indicando as tecnologias -->
   <img src="https://img.shields.io/badge/Python-3776AB?style=for-the-badge&logo=python&logoColor=white" alt="Python" />
