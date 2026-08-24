@@ -3,6 +3,13 @@ import requests
 import pandas as pd
 import plotly.graph_objects as go
 
+# ToDO
+# Requisição
+# manipulação
+# Criação de kpis
+# Criação de gráfico
+# Criação de html
+
 # 1. Requisição à API
 url = "https://royalblue-turtle-204261.hostingersite.com/ws_dados.php?tipo_pesquisa=1"
 
@@ -312,7 +319,6 @@ html_template = f"""<!DOCTYPE html>
             </div>
         </div>
 
-        <!-- COLUNA 3 PARA LISTA DE ADMIN (ESTÁTICA) / COLUNA 9 PARA SEGMENTOS -->
         <div class="row mb-4">
             <div class="col-md-3">
                 <div class="chart-card">
@@ -386,9 +392,6 @@ html_template = f"""<!DOCTYPE html>
             }});
 
             let textoMelhorMes = maiorValorMes > 0 ? `${{melhorMes}} (${{maiorValorMes.toLocaleString('pt-BR')}})` : "N/A";
-
-            // NOTA: O KPI "Melhor Segmento (Geral)" permanece estático conforme preenchido pelo Python
-
             document.getElementById("kpiTotalQtd").innerText = totalQtd.toLocaleString('pt-BR');
             document.getElementById("kpiTotalClientes").innerText = totalClientes.toLocaleString('pt-BR');
             document.getElementById("kpiMelhorMes").innerText = textoMelhorMes;
@@ -466,7 +469,6 @@ html_template = f"""<!DOCTYPE html>
 </html>
 """
 
-# 8. Salva o HTML gerado
 with open("dashboard_consorcios.html", "w", encoding="utf-8") as f:
     f.write(html_template)
 
